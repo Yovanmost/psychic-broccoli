@@ -1,0 +1,88 @@
+@startuml
+
+skinparam classAttributeIconSize 0
+
+' class dateTime {
+'     + day: int
+'     + month: int
+'     + year: int
+'     + hour: int
+'     + minute: int
+'     + second: int
+' }
+
+' dateTime <|-- item
+
+class Item {
+    + filename: string
+    + dataOfCreation: dateTime
+    + tags: string    
+}
+
+Item <|-- File
+
+class File {
+    + size: int
+    + software: string
+    ' + path: string
+    + pathName = path + item.filename: string
+}
+
+Item <|-- Folder
+Folder "1" o-- "1..*" Item
+
+class Folder {
+    + items: Item* // vector maybe
+}
+
+File <|-- Media
+
+class Media {
+    + qualityCompress: float // 0->1
+}
+
+Media <|-- Video
+Media <|-- 3D_model
+Media <|-- Image
+
+class Video {
+    + width: int
+    + height: int
+    + length: int
+}
+
+class 3D_model {
+    + polygon: int
+}
+
+class Image {
+    + width: int
+    + height: int
+}
+
+File <|-- Document
+
+class Document {
+    + type: string
+}
+
+class text {
+
+}
+
+class spreadsheet {
+
+}
+
+class slide {
+
+}
+
+Document <|-- text
+Document <|-- spreadsheet
+Document <|-- slide
+
+
+
+
+@enduml
